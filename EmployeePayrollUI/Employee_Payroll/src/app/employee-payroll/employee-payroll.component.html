@@ -1,0 +1,63 @@
+<div class="container">
+  <h2>Employee Payroll</h2>
+
+  <form (ngSubmit)="addEmployee()">
+    <div class="form-group">
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="newEmployee.name" name="name" required />
+    </div>
+
+    <div class="form-group">
+      <label>Gender:</label>
+      <select [(ngModel)]="newEmployee.gender" name="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Department:</label>
+      <input type="text" [(ngModel)]="newEmployee.department" name="department" />
+    </div>
+
+    <div class="form-group">
+      <label>Salary ($):</label>
+      <input type="number" [(ngModel)]="newEmployee.salary" name="salary" required />
+    </div>
+
+    <div class="form-group">
+      <label>Start Date:</label>
+      <input type="date" [(ngModel)]="newEmployee.startDate" name="startDate" required />
+    </div>
+
+    <button type="submit">Add Employee</button>
+  </form>
+
+  <!-- ✅ Show table only when employees exist -->
+  <table *ngIf="employees.length > 0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Salary ($)</th>
+        <th>Start Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.id }}</td>
+        <td>{{ employee.name }}</td>
+        <td>{{ employee.gender }}</td>
+        <td>{{ employee.department }}</td>
+        <td>{{ employee.salary }}</td>
+        <td>{{ employee.startDate }}</td>
+        <td>
+          <button (click)="removeEmployee(employee.id)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
